@@ -6,6 +6,7 @@ public class UserInterface {
     Scanner scanner = new Scanner(System.in);
     Multiply multiply = new Multiply();
     Transpose transpose = new Transpose();
+    Determinant determinant = new Determinant();
 
     public double[][] matrixDouble() {
         System.out.print("Enter size of matrix: ");
@@ -114,6 +115,13 @@ public class UserInterface {
         }
     }
 
+    public void determinant(){
+        int[][] matrix = matrixInteger();
+        int det = determinant.getDeterminant(matrix);
+        System.out.println("The result is:");
+        System.out.println(det);
+    }
+
     public static void options() {
         System.out.println("1. Add matrices\n" +
                 "2. Multiply matrix to a constant\n" +
@@ -147,7 +155,7 @@ public class UserInterface {
                     transposeMatrix();
                     break;
                 case 5:
-                    System.out.println("The result is: ");
+                    determinant();
                     break;
             }
         }
