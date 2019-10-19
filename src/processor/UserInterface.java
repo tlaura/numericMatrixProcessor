@@ -8,6 +8,49 @@ public class UserInterface {
     Transpose transpose = new Transpose();
     Determinant determinant = new Determinant();
 
+    public static void options() {
+        System.out.println("1. Add matrices\n" +
+                "2. Multiply matrix to a constant\n" +
+                "3. Multiply matrices\n" +
+                "4. Transpose matrix\n" +
+                "5. Calculate determinant\n" +
+                "6. Inverse matrix\n" +
+                "0. Exit");
+        System.out.println();
+    }
+
+    public void run() {
+        boolean exit = false;
+        while(!exit){
+            options();
+            System.out.print("Your choice: ");
+            int choice = Integer.parseInt(scanner.nextLine());
+            switch (choice) {
+                case 0:
+                    exit = true;
+                    break;
+                case 1:
+                    matrixDouble();
+                    break;
+                case 2:
+                    multiplyWithConstant();
+                    break;
+                case 3:
+                    multiplyMatrices();
+                    break;
+                case 4:
+                    transposeMatrix();
+                    break;
+                case 5:
+                    determinant();
+                    break;
+                case 6:
+                    inverseMatrix();
+                    break;
+            }
+        }
+    }
+
     public double[][] matrixDouble() {
         System.out.print("Enter size of matrix: ");
         String[] size = scanner.nextLine().split(" ");
@@ -118,7 +161,7 @@ public class UserInterface {
         System.out.println();
     }
 
-    public void determinant(){
+    public void determinant() {
         int[][] matrix = matrixInteger();
         int det = determinant.getDeterminant(matrix, matrix.length);
         System.out.println("The result is:");
@@ -126,42 +169,10 @@ public class UserInterface {
         System.out.println();
     }
 
-    public static void options() {
-        System.out.println("1. Add matrices\n" +
-                "2. Multiply matrix to a constant\n" +
-                "3. Multiply matrices\n" +
-                "4. Transpose matrix\n" +
-                "5. Calculate determinant\n" +
-                "0. Exit");
+    public void inverseMatrix() {
+        double[][] matrix = matrixDouble();
+        determinant.inverseMatrix(matrix);
+        System.out.println("The result is:");
         System.out.println();
-    }
-
-    public void run() {
-        boolean exit = false;
-        while(!exit){
-            options();
-            System.out.print("Your choice: ");
-            int choice = Integer.parseInt(scanner.nextLine());
-            switch (choice) {
-                case 0:
-                    exit = true;
-                    break;
-                case 1:
-                    matrixDouble();
-                    break;
-                case 2:
-                    multiplyWithConstant();
-                    break;
-                case 3:
-                    multiplyMatrices();
-                    break;
-                case 4:
-                    transposeMatrix();
-                    break;
-                case 5:
-                    determinant();
-                    break;
-            }
-        }
     }
 }

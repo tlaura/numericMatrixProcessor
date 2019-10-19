@@ -42,4 +42,22 @@ public class Determinant {
         }
         return det;
     }
+
+//    identity matrix is the matrix in which all elements of the main diagonal are ones and other are zeros
+    public double[][] inverseMatrix(double[][] matrix) {
+        return matrix;
+    }
+
+    public void printInverse(double[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if(matrix[i][j] < 0){
+                    System.out.printf("%.2f ", matrix[i][j]);
+                } else {
+                    System.out.printf(" %.2f ", matrix[i][j]);
+                }
+            }
+            System.out.println();
+        }
+    }
 }
