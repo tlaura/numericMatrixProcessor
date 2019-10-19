@@ -70,6 +70,7 @@ public class UserInterface {
         double[][] result = multiply.multiplyWithConstant(matrix, constant);
         System.out.println("The multiplication result is: ");
         displayDoubleMatrix(result);
+        System.out.println();
     }
 
     public void multiplyMatrices(){
@@ -79,6 +80,7 @@ public class UserInterface {
         double[][] result = multiply.multiplyMatrices(firstMatrix, secondMatrix);
         System.out.println("The multiplication result is: ");
         displayDoubleMatrix(result);
+        System.out.println();
     }
 
     public void transposeMatrix(){
@@ -113,13 +115,15 @@ public class UserInterface {
                 displayIntegerMatrix(matrix);
                 break;
         }
+        System.out.println();
     }
 
     public void determinant(){
         int[][] matrix = matrixInteger();
-        int det = determinant.getDeterminant(matrix);
+        int det = determinant.getDeterminant(matrix, matrix.length);
         System.out.println("The result is:");
         System.out.println(det);
+        System.out.println();
     }
 
     public static void options() {
@@ -127,7 +131,7 @@ public class UserInterface {
                 "2. Multiply matrix to a constant\n" +
                 "3. Multiply matrices\n" +
                 "4. Transpose matrix\n" +
-                "5. Calculate a determinant\n" +
+                "5. Calculate determinant\n" +
                 "0. Exit");
         System.out.println();
     }
