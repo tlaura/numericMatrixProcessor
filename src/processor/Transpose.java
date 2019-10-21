@@ -3,11 +3,11 @@ package processor;
 public class Transpose {
 
 
-    public int[][] mainDiagonal(int[][] matrix) {
+    public double[][] mainDiagonal(double[][] matrix) {
         if(matrix.length != matrix[0].length){
             throw new IllegalArgumentException("Transposition is only possible on square matrix");
         }
-        int temp;
+        double temp;
         for (int i = 0; i < matrix.length/2+1; i++) {
             for (int j = i; j < matrix[0].length; j++) {
                 temp = matrix[i][j];
@@ -18,8 +18,8 @@ public class Transpose {
         return matrix;
     }
 
-    private static int[][] rotate90Degrees(int[][] matrix) {
-        int[][] result = new int[matrix.length][matrix[0].length];
+    private static double[][] rotate90Degrees(double[][] matrix) {
+        double[][] result = new double[matrix.length][matrix[0].length];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[i].length; j++) {
                 result[i][j] = matrix[matrix.length-1-j][i];
@@ -28,10 +28,10 @@ public class Transpose {
         return result;
     }
     
-    public int[][] flipVertical(int[][] matrix) {
+    public double[][] flipVertical(double[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length/2; j++) {
-                int temp = matrix[i][matrix.length-j-1];
+                double temp = matrix[i][matrix.length-j-1];
                 matrix[i][matrix.length-j-1] = matrix[i][j];
                 matrix[i][j] = temp;
             }
@@ -39,10 +39,10 @@ public class Transpose {
         return matrix;
     }
 
-    public int[][] flipHorizontal(int[][] matrix) {
+    public double[][] flipHorizontal(double[][] matrix) {
         for (int i = 0; i < matrix.length/2; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
-                int temp = matrix[matrix.length-i-1][j];
+                double temp = matrix[matrix.length-i-1][j];
                 matrix[matrix.length-i-1][j] = matrix[i][j];
                 matrix[i][j] = temp;
             }
@@ -51,11 +51,11 @@ public class Transpose {
     }
 
 //    rotate it 90 degrees, and transpose at main diagonal
-    public int[][] sideDiagonal(int[][] matrix) {
+    public double[][] sideDiagonal(double[][] matrix) {
         if(matrix.length != matrix[0].length){
             throw new IllegalArgumentException("Transposition is only possible on square matrix");
         }
-        int[][] resultMatrix = flipHorizontal(rotate90Degrees(matrix));
+        double[][] resultMatrix = flipHorizontal(rotate90Degrees(matrix));
         return resultMatrix;
     }
 }

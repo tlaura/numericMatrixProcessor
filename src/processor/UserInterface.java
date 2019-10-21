@@ -30,7 +30,7 @@ public class UserInterface {
                     exit = true;
                     break;
                 case 1:
-                    matrixDouble();
+                    matrix();
                     break;
                 case 2:
                     multiplyWithConstant();
@@ -51,7 +51,7 @@ public class UserInterface {
         }
     }
 
-    public double[][] matrixDouble() {
+    public double[][] matrix() {
         System.out.print("Enter size of matrix: ");
         String[] size = scanner.nextLine().split(" ");
         int n = Integer.parseInt(size[0]);
@@ -68,34 +68,7 @@ public class UserInterface {
         return matrix;
     }
 
-    public int[][] matrixInteger() {
-        System.out.print("Enter size of matrix: ");
-        String[] size = scanner.nextLine().split(" ");
-        int n = Integer.parseInt(size[0]);
-        int m = Integer.parseInt(size[1]);
-
-        System.out.println("Enter matrix: ");
-        int[][] matrix = new int[n][m];
-        for (int i = 0; i < n; i++) {
-            String[] line = scanner.nextLine().split(" ");
-            for (int j = 0; j < m; j++) {
-                matrix[i][j] = Integer.parseInt(line[j]);
-            }
-        }
-        return matrix;
-    }
-
-    public static void displayIntegerMatrix(int[][] matrix) {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                System.out.print(matrix[i][j] + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-    }
-
-    public static void displayDoubleMatrix(double[][] matrix){
+    public static void displayMatrix(double[][] matrix){
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 System.out.print(matrix[i][j] + " ");
@@ -106,23 +79,23 @@ public class UserInterface {
     }
 
     public void multiplyWithConstant() {
-        double[][] matrix = matrixDouble();
+        double[][] matrix = matrix();
         System.out.print("Enter constant: ");
         int constant = Integer.parseInt(scanner.nextLine());
 
         double[][] result = multiply.multiplyWithConstant(matrix, constant);
         System.out.println("The multiplication result is: ");
-        displayDoubleMatrix(result);
+        displayMatrix(result);
         System.out.println();
     }
 
     public void multiplyMatrices(){
-        double[][] firstMatrix = matrixDouble();
-        double[][] secondMatrix = matrixDouble();
+        double[][] firstMatrix = matrix();
+        double[][] secondMatrix = matrix();
 
         double[][] result = multiply.multiplyMatrices(firstMatrix, secondMatrix);
         System.out.println("The multiplication result is: ");
-        displayDoubleMatrix(result);
+        displayMatrix(result);
         System.out.println();
     }
 
@@ -134,45 +107,51 @@ public class UserInterface {
         int choice = Integer.parseInt(scanner.nextLine());
         switch (choice){
             case 1:
-                int[][] matrix = matrixInteger();
+                double[][] matrix = matrix();
                 transpose.mainDiagonal(matrix);
                 System.out.println("The result is:");
-                displayIntegerMatrix(matrix);
+                displayMatrix(matrix);
                 break;
             case 2:
-                matrix = matrixInteger();
+                matrix = matrix();
                 matrix = transpose.sideDiagonal(matrix);
                 System.out.println("The result is:");
-                displayIntegerMatrix(matrix);
+                displayMatrix(matrix);
                 break;
             case 3:
-                matrix = matrixInteger();
+                matrix = matrix();
                 transpose.flipVertical(matrix);
                 System.out.println("The result is:");
-                displayIntegerMatrix(matrix);
+                displayMatrix(matrix);
                 break;
             case 4:
-                matrix = matrixInteger();
+                matrix = matrix();
                 transpose.flipHorizontal(matrix);
                 System.out.println("The result is:");
-                displayIntegerMatrix(matrix);
+                displayMatrix(matrix);
                 break;
         }
         System.out.println();
     }
 
     public void determinant() {
-        int[][] matrix = matrixInteger();
-        int det = determinant.getDeterminant(matrix, matrix.length);
+        double[][] matrix = matrix();
+        double det = determinant.getDeterminant(matrix, matrix.length);
         System.out.println("The result is:");
         System.out.println(det);
         System.out.println();
     }
 
     public void inverseMatrix() {
-        double[][] matrix = matrixDouble();
-        determinant.inverseMatrix(matrix);
-        System.out.println("The result is:");
+        double[][] matrix = matrix();
+        double[][] result;
+        if(determinant.inverseMatrix(matrix) == null){
+            System.out.println("Inverse matrix can't be found because the determinant equals to 0");
+        } else {
+            result = determinant.inverseMatrix(matrix);
+            System.out.println("The result is:");
+            determinant.printInverse(result);
+        }
         System.out.println();
     }
 }

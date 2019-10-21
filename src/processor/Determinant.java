@@ -1,10 +1,11 @@
 package processor;
 
 public class Determinant {
-//    create subMatrix
-    public int[][] getSubMatrix(int[][] matrix, int deleteRow, int deleteCol){
+    Transpose transpose = new Transpose();
+
+    public double[][] getSubMatrix(double[][] matrix, int deleteRow, int deleteCol){
         int len = matrix.length;
-        int[][] subMatrix = new int[len-1][len-1];
+        double[][] subMatrix = new double[len-1][len-1];
         int i = 0, j = 0;
 
         for (int row = 0; row < len; row++) {
@@ -18,22 +19,19 @@ public class Determinant {
                     j = 0;
                     i++;
                 }
-
             }
         }
         return subMatrix;
     }
 
-    public int getDeterminant(int[][] matrix, int len){
+    public double getDeterminant(double[][] matrix, int len){
         int det = 0;
-//        base cases
         if(len == 1)
             return matrix[0][0];
         if(len == 2)
             return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
-
         int sign = 1;
-        int[][] subMatrix;
+        double[][] subMatrix;
         for (int i = 0; i < len; i++) {
 //            getting sub matrices of first row
             subMatrix = getSubMatrix(matrix, 0, i);
@@ -43,9 +41,24 @@ public class Determinant {
         return det;
     }
 
-//    identity matrix is the matrix in which all elements of the main diagonal are ones and other are zeros
     public double[][] inverseMatrix(double[][] matrix) {
-        return matrix;
+        double[][] inverse = new double[matrix.length][matrix.length];
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                double[][] m = getSubMatrix(matrix, i, j);
+                m = transpose.mainDiagonal(m);
+                inverse[i][j] = Math.pow(-1, i+j) * getDeterminant(matrix, matrix.length);
+            }
+        }
+        double det = 1.0/ getDeterminant(matrix, matrix.length);
+        for (int i = 0; i < inverse.length; i++) {
+            for (int j = 0; j < inverse[0].length; j++) {
+                double temp = inverse[i][j];
+                inverse[i][j] = inverse[j][i] * det;
+                inverse[j][i] = temp * det;
+            }
+        }
+        return inverse;
     }
 
     public void printInverse(double[][] matrix) {

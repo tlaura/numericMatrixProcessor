@@ -13,13 +13,14 @@ public class Main {
 //                {4, 2, 1}
 //        };
         double[][] b = new double[][]{
-                {0.33, 0, 0.33},
-                {-0.33, 0, 0.66},
-                {0.16, 0.5, -0.33}
+                {2, -1, 0},
+                {0, 1, 2},
+                {1, 1, 0}
         };
 
         Determinant determinant = new Determinant();
-        determinant.printInverse(b);
+        double[][] inverse = determinant.inverseMatrix(b);
+        determinant.printInverse(inverse);
 
 //        for (int i = 0; i < sub.length; i++) {
 //            for (int j = 0; j < sub.length; j++) {
